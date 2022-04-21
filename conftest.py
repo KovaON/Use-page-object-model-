@@ -2,6 +2,16 @@ import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
+import pytest
+from selenium import webdriver
+
+# @pytest.fixture(scope="function")
+# def browser():
+#     print("\nstart browser for test..")
+#     browser = webdriver.Chrome()
+#     yield browser
+#     print("\nquit browser..")
+#     browser.quit()
 
 def pytest_addoption(parser):
     """ В терминал подаем параметр вида '--language="es"'
@@ -14,6 +24,7 @@ def pytest_addoption(parser):
 def browser(request):
     # задаем user_language
     user_language = request.config.getoption('language')
+    print(user_language)
     # Создаем опции браузера
     options = Options()
     # В опции вебдрайвера передаем user_language
@@ -22,3 +33,4 @@ def browser(request):
     browser.implicitly_wait(10)
     yield browser
     browser.quit()
+
